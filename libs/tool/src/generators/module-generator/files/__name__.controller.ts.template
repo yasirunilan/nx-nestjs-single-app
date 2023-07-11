@@ -1,0 +1,50 @@
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    ParseIntPipe,
+    Patch,
+    Post,
+    UseGuards,
+  } from '@nestjs/common';
+  import { <%= singular(pascalCase(name)) %>Service } from './<%= singular(name) %>.service';
+  import { Create<%= singular(pascalCase(name)) %>Dto, DTO } from '@lib/database';
+  import { AuthGuard } from '@nestjs/passport';
+  
+  @Controller('<%= singular(name) %>')
+  export class <%= singular(pascalCase(name)) %>Controller {
+    constructor(private readonly <%= singular(name) %>Service: <%= singular(pascalCase(name)) %>Service) {}
+    
+    @UseGuards(AuthGuard('jwt'))
+    @Get()
+    get<%= plural(pascalCase(name)) %>() {
+      return this.<%= singular(name) %>Service.get<%= plural(pascalCase(name)) %>();
+    }
+  
+    @UseGuards(AuthGuard('jwt'))
+    @Get(':id')
+    get<%= singular(pascalCase(name)) %>(@Param('id', ParseIntPipe) id: number) {
+      return this.<%= singular(name) %>Service.get<%= singular(pascalCase(name)) %>(id);
+    }
+  
+    @UseGuards(AuthGuard('jwt'))
+    @Post()
+    add<%= singular(pascalCase(name)) %>(@Body() payload: Create<%= singular(pascalCase(name)) %>Dto) {
+      return this.<%= singular(name) %>Service.add<%= singular(pascalCase(name)) %>(payload);
+    }
+  
+    @UseGuards(AuthGuard('jwt'))
+    @Patch(':id')
+    update<%= singular(pascalCase(name)) %>(@Param('id', ParseIntPipe) id: number, @Body() payload: DTO.<%= singular(pascalCase(name)) %>UpdateInput) {
+      return this.<%= singular(name) %>Service.update<%= singular(pascalCase(name)) %>(id, payload);
+    }
+  
+    @UseGuards(AuthGuard('jwt'))
+    @Delete(':id')
+    delete<%= singular(pascalCase(name)) %>(@Param('id', ParseIntPipe) id: number) {
+      return this.<%= singular(name) %>Service.delete<%= singular(pascalCase(name)) %>(id);
+    }
+  }
+  

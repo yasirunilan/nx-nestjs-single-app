@@ -4,11 +4,47 @@
   "sourceRoot": "libs/tool/src",
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/tool",
+        "main": "libs/tool/src/index.ts",
+        "tsConfig": "libs/tool/tsconfig.lib.json",
+        "assets": [
+          "libs/tool/*.md",
+          {
+            "input": "./libs/tool/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/tool/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/tool",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/tool",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/tool/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/tool/**/*.ts",
+          "libs/tool/package.json",
+          "libs/tool/generators.json"
+        ]
       }
     },
     "test": {

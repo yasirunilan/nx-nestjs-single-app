@@ -1,0 +1,11 @@
+import { Module } from '@nestjs/common';
+import { <%= singular(pascalCase(name)) %>Controller } from './<%= singular(name) %>.controller';
+import { <%= singular(pascalCase(name)) %>Service } from './<%= singular(name) %>.service';
+import { DatabaseModule } from '@lib/database';
+
+@Module({
+  imports: [DatabaseModule],
+  controllers: [<%= singular(pascalCase(name)) %>Controller],
+  providers: [<%= singular(pascalCase(name)) %>Service],
+})
+export class <%= singular(pascalCase(name)) %>Module {}

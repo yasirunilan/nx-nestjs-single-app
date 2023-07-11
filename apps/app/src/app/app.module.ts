@@ -4,7 +4,7 @@ import { UserModule } from '../user/user.module';
 import { DatabaseModule } from '@lib/database';
 import { AuthModule } from '../auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import {AuthenticationModule} from '@lib/authentication'
+import { AuthenticationModule } from '@lib/authentication';
 
 @Module({
   imports: [
@@ -12,7 +12,7 @@ import {AuthenticationModule} from '@lib/authentication'
     DatabaseModule,
     UserModule,
     AuthModule,
-    AuthenticationModule
+    AuthenticationModule,
   ],
   controllers: [],
   providers: [],
