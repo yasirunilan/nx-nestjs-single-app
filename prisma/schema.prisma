@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CartProduct {
+  @@map(name: "cart_products")
+  id         Int       @id @default(autoincrement()) @map(name: "id")
+  cartId     Int?      @map(name: "cart_id")
+  productId  Int?      @map(name: "product_id")
+  quantity   Int       @map(name: "quantity")
+  createdAt  DateTime? @default(now()) @db.Timestamp(6) @map(name: "created_at")
+  carts      Cart?     @relation(fields: [cartId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  products   Product?  @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Cart {
+  @@map(name: "carts")
+  id            Int             @id @default(autoincrement()) @map(name: "id")
+  userId        Int?            @map(name: "user_id")
+  createdAt     DateTime?       @default(now()) @db.Timestamp(6) @map(name: "created_at")
+  cartProducts  CartProduct[]
+  users         User?          @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model ProductCategory {
+  @@map(name: "product_categories")
+  id            Int        @id @default(autoincrement()) @map(name: "id")
+  categoryName  String     @db.VarChar(255) @map(name: "category_name")
+  createdAt     DateTime?  @default(now()) @db.Timestamp(6) @map(name: "created_at")
+  products      Product[]
+}
+
+model Product {
+  @@map(name: "products")
+  id                 Int                 @id @default(autoincrement()) @map(name: "id")
+  productName        String              @db.VarChar(255) @map(name: "product_name")
+  price              Decimal             @db.Decimal(10, 2) @map(name: "price")
+  description        String?             @map(name: "description")
+  categoryId         Int?                @map(name: "category_id")
+  createdAt          DateTime?           @default(now()) @db.Timestamp(6) @map(name: "created_at")
+  cartProducts       CartProduct[]
+  productCategories  ProductCategory? @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model User {
+  @@map(name: "users")
+  id         Int       @id @default(autoincrement()) @map(name: "id")
+  username   String    @db.VarChar(255) @map(name: "username")
+  email      String    @db.VarChar(255) @map(name: "email")
+  created_at DateTime? @default(now()) @db.Timestamp(6) @map(name: "created_at")
+  carts      Cart[]
+}
+
