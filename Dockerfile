@@ -17,6 +17,7 @@ COPY . .
 EXPOSE 3000
 
 # Run Migrations
+RUN npx prisma format
 RUN npx prisma generate
 RUN npx prisma migrate deploy
 # RUN npx prisma db seed
