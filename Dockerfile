@@ -18,7 +18,7 @@ EXPOSE 3000
 
 # Run Migrations
 RUN npx prisma generate
-# RUN npx prisma migrate deploy
+RUN npx prisma migrate deploy
 # RUN npx prisma db seed
 
 # Creates a "dist" folder with the production build
