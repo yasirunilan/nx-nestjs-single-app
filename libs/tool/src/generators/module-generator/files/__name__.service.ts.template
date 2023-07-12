@@ -1,4 +1,4 @@
-import { Create<%= singular(pascalCase(name)) %>Dto, DTO, <%= singular(pascalCase(name)) %>, <%= singular(pascalCase(name)) %>Repository } from '@lib/database';
+import { Create<%= singular(pascalCase(name)) %>Dto, Update<%= singular(pascalCase(name)) %>Dto, <%= singular(pascalCase(name)) %>, <%= singular(pascalCase(name)) %>Repository } from '@lib/database';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class <%= singular(pascalCase(name)) %>Service {
     const <%= singular(name) %> = await this.repo.create<%= singular(pascalCase(name)) %>(payload);
     return <%= singular(name) %>;
   }
-  async update<%= singular(pascalCase(name)) %>(id: number, payload: DTO.<%= singular(pascalCase(name)) %>UpdateInput) {
+  async update<%= singular(pascalCase(name)) %>(id: number, payload: Update<%= singular(pascalCase(name)) %>Dto) {
     const <%= singular(name) %> = await this.repo.update<%= singular(pascalCase(name)) %>(id, payload);
     return <%= singular(name) %>;
   }

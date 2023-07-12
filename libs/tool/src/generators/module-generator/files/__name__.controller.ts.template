@@ -10,7 +10,7 @@ import {
     UseGuards,
   } from '@nestjs/common';
   import { <%= singular(pascalCase(name)) %>Service } from './<%= singular(name) %>.service';
-  import { Create<%= singular(pascalCase(name)) %>Dto, DTO } from '@lib/database';
+  import { Create<%= singular(pascalCase(name)) %>Dto, DTO, Update<%= singular(pascalCase(name)) %>Dto } from '@lib/database';
   import { AuthGuard } from '@nestjs/passport';
   
   @Controller('<%= singular(name) %>')
@@ -37,7 +37,7 @@ import {
   
     @UseGuards(AuthGuard('jwt'))
     @Patch(':id')
-    update<%= singular(pascalCase(name)) %>(@Param('id', ParseIntPipe) id: number, @Body() payload: DTO.<%= singular(pascalCase(name)) %>UpdateInput) {
+    update<%= singular(pascalCase(name)) %>(@Param('id', ParseIntPipe) id: number, @Body() payload: Update<%= singular(pascalCase(name)) %>Dto) {
       return this.<%= singular(name) %>Service.update<%= singular(pascalCase(name)) %>(id, payload);
     }
   
