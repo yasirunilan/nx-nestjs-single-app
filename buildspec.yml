@@ -3,10 +3,12 @@ version: 0.2
 phases:
   install:
     commands:
-      - TAG_NAME=latest
+      - TAG_NAME=$CODEBUILD_BUILD_NUMBER
+      - echo $CODEBUILD_BUILD_NUMBER
       - echo $AWS_DEFAULT_REGION
       - echo $REPOSITORY_URI
       - echo $TAG_NAME
+      - echo $REPOSITORY_NAME
       - pip install --upgrade pip
       - pip install --upgrade awscli
   pre_build:
@@ -18,8 +20,8 @@ phases:
       - echo Building the Docker image... 
       - envsubst "`printf '${%s} ' $(sh -c "env|cut -d'=' -f1")`" < ./.env.example > ./.env
       - echo "$(cat ./.env)"
-      - docker build -t ai-genarative-be-repo .
-      - docker tag ai-genarative-be-repo:latest 989299900151.dkr.ecr.ap-south-1.amazonaws.com/ai-genarative-be-repo:latest
+      - docker build -t $REPOSITORY_NAME:$TAG_NAME .
+      - docker tag $REPOSITORY_NAME:$TAG_NAME $REPOSITORY_URI:$TAG_NAME
       
 
   post_build:
@@ -27,5 +29,5 @@ phases:
       - $(aws ecr get-login --region $AWS_REGION --no-include-email)
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push 989299900151.dkr.ecr.ap-south-1.amazonaws.com/ai-genarative-be-repo:latest
+      - docker push $REPOSITORY_URI:$TAG_NAME
       - bash ./deploy.sh

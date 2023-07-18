@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE="$REPOSITORY_URI:latest"
+IMAGE="$REPOSITORY_URI:$CODEBUILD_BUILD_NUMBER"
 PREVIOUS_TASK_DEF=$(aws ecs describe-task-definition --region $ECS_REGION --task-definition $ECS_TASK_DEFINITION_NAME)
 NEW_CONTAINER_DEF=$(echo $PREVIOUS_TASK_DEF | python -c "
 import sys, json
