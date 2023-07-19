@@ -204,6 +204,12 @@ variable "ecs_autoscaling_max_capacity" {
   type        = number
   default     = 4
 }
+# This is to force delete ECR Repository
+variable "ecr_force_delete" {
+  type        = bool
+  description = "ECR Force Delete Repository"
+  default     = false
+}
 
 # S3 Bucket for CodePipeline
 variable "s3_bucket_pipeline_artifact_store_force_destroy" {
@@ -232,5 +238,5 @@ variable "git_repository_name" {
 variable "git_repository_branch" {
   description = "Git Branch Name for Codepipeline"
   type        = string
-  default = "main"
+  default     = "main"
 }

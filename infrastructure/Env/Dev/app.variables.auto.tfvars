@@ -15,6 +15,9 @@ ecs_target_group_health_check_path = "/api/health"
 # ECS Service Variables
 ecs_service_container_port = 3000
 
+# ECR Service Variables
+ecr_force_delete = true
+
 # Git Variables
 git_repository_url  = "https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/AI-Generated-App"
 git_repository_name = "AI-Generated-App"

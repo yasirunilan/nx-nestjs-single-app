@@ -6,6 +6,7 @@
 resource "aws_ecr_repository" "ecr_repository" {
   name                 = var.ecr_name
   image_tag_mutability = var.ecr_repository_image_tag_mutability
+  force_delete = var.ecr_force_delete
 
   tags = merge(
     {

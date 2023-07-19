@@ -1,7 +1,6 @@
 # Provider
 provider "aws" {
   region = var.region
-  profile = "default"
 }
 
 # Local Variables
@@ -211,6 +210,7 @@ module "ecr" {
 
   ecr_name        = "${local.app_name}-repo"
   ecr_description = "ECR Repository to store Docker Images"
+  ecr_force_delete = var.ecr_force_delete
 }
 
 # ECS Task Definition

@@ -19,3 +19,10 @@ variable "ecr_repository_image_tag_mutability" {
   description = "ECR Repository Image Tag Mutability"
   default     = "MUTABLE"
 }
+
+
+variable "ecr_force_delete" {
+  type        = bool
+  description = "ECR Force Delete Repository"
+  default = false
+}
