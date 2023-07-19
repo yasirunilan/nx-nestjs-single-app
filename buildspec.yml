@@ -9,6 +9,7 @@ phases:
       - echo $REPOSITORY_URI
       - echo $TAG_NAME
       - echo $REPOSITORY_NAME
+      - echo $DATABASE_URL
       - pip install --upgrade pip
       - pip install --upgrade awscli
   pre_build:
