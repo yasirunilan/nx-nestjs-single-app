@@ -11,7 +11,7 @@ bastion_host_key_pair_name = "nestjs-single-docker-app-test-keypair"
 ecs_taks_definition_host_port = 3000
 ecs_taks_definition_cpu       = 1024
 ecs_taks_definition_memory    = 2048
-
+ecs_target_group_health_check_path = "/api/health"
 # ECS Service Variables
 ecs_service_container_port = 3000
 
