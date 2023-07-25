@@ -1,11 +1,11 @@
 # App Variables
 environment = "dev"
-app_name    = "gb-app-1"
+app_name    = "gb-demo-1"
 app_version = "0.0.1"
 region      = "ap-south-1"
 
 # Database Variables
-database_name            = "nestjssingledockerappdb"
+database_name            = "gbdemo1"
 database_master_username = "postgres"
 database_master_password = "master.123"
 database_port            = "5432"
@@ -25,6 +25,6 @@ ecs_service_container_port = 3000
 ecr_force_delete = true
 
 # Git Variables
-git_repository_url  = "https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/AI-Generated-App"
-git_repository_name = "AI-Generated-App"
+git_repository_url  = "https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/gb-demo-1"
+git_repository_name = "gb-demo-1"
 git_repository_branch     = "master"
